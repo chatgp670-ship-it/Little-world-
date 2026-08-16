@@ -1,0 +1,117 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #0d1117;
+  color: #e6edf3;
+  line-height: 1.6;
+}
+
+section {
+  padding: 60px 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+h1, h2, h3, h4 {
+  color: #ffffff;
+  margin-bottom: 15px;
+}
+
+p {
+  color: #8b949e;
+  margin-bottom: 20px;
+}
+
+.hero-scene {
+  padding-top: 40px;
+  background: linear-gradient(180deg, #161b22 0%, #0d1117 100%);
+}
+
+.childhood-card {
+  max-width: 320px;
+  margin: 0 auto 25px auto;
+  background: #161b22;
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid #30363d;
+}
+
+.hero-img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  display: block;
+}
+
+.hero-tag {
+  display: block;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #8b949e;
+  font-style: italic;
+}
+
+.fish-grid, .art-gallery-grid, .space-images-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.fish-card, .art-card, .space-card {
+  background: #161b22;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #30363d;
+  padding: 10px;
+}
+
+.fish-img, .art-img, .space-img, .tanks-img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+}
+
+.tanks-overview-card {
+  margin-top: 30px;
+  background: #161b22;
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid #30363d;
+}
+
+.play-btn, .canon-play-btn {
+  background-color: #238636;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.play-btn:hover, .canon-play-btn:hover {
+  background-color: #2ea043;
+}
+
+.finale-card {
+  background: linear-gradient(145deg, #161b22, #0d1117);
+  border: 1px solid #30363d;
+  padding: 40px 20px;
+  border-radius: 16px;
+  margin-top: 40px;
+}
+
+.final-message-box {
+  margin-top: 30px;
+  font-style: italic;
+  color: #c9d1d9;
+}
