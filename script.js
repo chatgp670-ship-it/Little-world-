@@ -1,447 +1,279 @@
-/* =====================================================
-   INTRO — THREE LITTLE SECRETS
-===================================================== */
+/* ==========================================
+PAGE NAVIGATION
+========================================== */
 
-const introButton =
-  document.getElementById("introButton");
+const pages =
+document.querySelectorAll(".page");
 
-const introSecret =
-  document.querySelector("#introSecret span");
+const nextButtons =
+document.querySelectorAll("[data-next]");
 
-const introSecrets = [
-  "full of life",
-  "wala derly ferly",
-  "i wish they became 1000"
-];
+const currentPage =
+document.getElementById("currentPage");
 
-let introIndex = 0;
+let current = 0;
 
-introButton.addEventListener("click", () => {
+function showPage(index) {
 
-  introSecret.classList.remove("show");
+if (
+index < 0 ||
+index >= pages.length
+) {
+return;
+}
 
-  setTimeout(() => {
+pages[current]
+.classList
+.remove("active");
 
-    introSecret.textContent =
-      introSecrets[introIndex];
+current = index;
 
-    introSecret.classList.add("show");
+pages[current]
+.classList
+.add("active");
 
-    introIndex++;
+currentPage.textContent =
+String(current + 1)
+.padStart(2, "0");
 
-    if (introIndex >= introSecrets.length) {
-      introIndex = 0;
-    }
+}
 
-  }, 300);
+nextButtons.forEach(button => {
 
-});
+button.addEventListener("click", () => {
 
-
-/* =====================================================
-   SCROLL PROGRESS
-===================================================== */
-
-const progressBar =
-  document.getElementById("progressBar");
-
-window.addEventListener("scroll", () => {
-
-  const total =
-    document.documentElement.scrollHeight -
-    window.innerHeight;
-
-  const progress =
-    (window.scrollY / total) * 100;
-
-  progressBar.style.width =
-    `${progress}%`;
+showPage(current + 1);
 
 });
 
-
-/* =====================================================
-   FISH — TAP TO FLIP
-===================================================== */
-
-const fishCards =
-  document.querySelectorAll(".fish-card");
-
-fishCards.forEach(card => {
-
-  card.addEventListener("click", () => {
-
-    card.classList.toggle("flipped");
-
-  });
-
 });
 
+/* ==========================================
+KEYBOARD NAVIGATION
+========================================== */
 
-/* =====================================================
-   AQUARIUM
-===================================================== */
+document.addEventListener(
+"keydown",
+event => {
 
-const aquariumCover =
-  document.getElementById("aquariumCover");
+if (  
+  event.key === "ArrowRight" ||  
+  event.key === "Enter"  
+) {  
 
-aquariumCover.addEventListener("click", () => {
+  showPage(current + 1);  
 
-  aquariumCover.classList.add("open");
+}  
 
-});
+if (event.key === "ArrowLeft") {  
 
+  showPage(current - 1);  
 
-/* =====================================================
-   ART — TAP TO REVEAL
-===================================================== */
+}
 
-const artCards =
-  document.querySelectorAll(".art-card");
+}
+);
 
-artCards.forEach(card => {
+/* ==========================================
+SWIPE NAVIGATION
+========================================== */
 
-  card.addEventListener("click", () => {
+let touchStartX = 0;
+let touchEndX = 0;
 
-    card.classList.toggle("open");
+document.addEventListener(
+"touchstart",
+event => {
 
-  });
+touchStartX =  
+  event.changedTouches[0].screenX;
 
-});
+},
+{ passive: true }
+);
 
+document.addEventListener(
+"touchend",
+event => {
 
-/* =====================================================
-   MUSIC
-===================================================== */
+touchEndX =  
+  event.changedTouches[0].screenX;  
+
+const difference =  
+  touchStartX - touchEndX;  
+
+if (Math.abs(difference) < 60) {  
+  return;  
+}  
+
+if (difference > 0) {  
+
+  showPage(current + 1);  
+
+} else {  
+
+  showPage(current - 1);  
+
+}
+
+},
+{ passive: true }
+);
+
+/* ==========================================
+SONG
+========================================== */
 
 const song =
-  document.getElementById("song");
+document.getElementById("song");
 
 const songButton =
-  document.getElementById("songButton");
+document.getElementById(
+"songButton"
+);
 
+songButton.addEventListener(
+"click",
+async () => {
 
-songButton.addEventListener("click", async () => {
+if (song.paused) {  
 
-  if (song.paused) {
+  song.currentTime = 20;  
 
-    song.currentTime = 20;
+  try {  
 
-    try {
+    await song.play();  
 
-      await song.play();
+    songButton.innerHTML = "Ⅱ";  
 
-    } catch(error) {
+  } catch(error) {  
 
-      console.log(error);
+    console.log(error);  
 
-    }
+  }  
 
-    songButton.innerHTML =
-      "⏸ <span>pause</span>";
+} else {  
 
-  } else {
+  song.pause();  
 
-    song.pause();
+  songButton.innerHTML = "♫";  
 
-    songButton.innerHTML =
-      "♪ <span>listen</span>";
+}
 
-  }
+}
+);
 
-});
+song.addEventListener(
+"timeupdate",
+() => {
 
+if (song.currentTime >= 30) {  
 
-song.addEventListener("timeupdate", () => {
+  song.pause();  
 
-  if (song.currentTime >= 30) {
+  song.currentTime = 20;  
 
-    song.pause();
+  songButton.innerHTML = "↻";  
 
-    song.currentTime = 20;
+}
 
-    songButton.innerHTML =
-      "↻ <span>again</span>";
+}
+);
 
-  }
-
-});
-
-
-/* =====================================================
-   SPACE — REVEAL IN STAGES
-===================================================== */
-
-const spaceExperience =
-  document.getElementById(
-    "spaceExperience"
-  );
-
-const spaceButton =
-  document.getElementById(
-    "spaceButton"
-  );
-
-const spaceText =
-  document.getElementById(
-    "spaceText"
-  );
-
-let spaceStage = 0;
-
-
-spaceButton.addEventListener("click", () => {
-
-  spaceStage++;
-
-
-  if (spaceStage === 1) {
-
-    spaceExperience
-      .classList
-      .add("stage-one");
-
-    spaceText.innerHTML = `
-
-      <span>
-        KEEP LOOKING
-      </span>
-
-      <h3>
-        There are galaxies
-        beyond galaxies.
-      </h3>
-
-    `;
-
-    spaceButton.textContent =
-      "look closer";
-
-  }
-
-
-  else if (spaceStage === 2) {
-
-    spaceExperience
-      .classList
-      .add("stage-two");
-
-    spaceText.innerHTML = `
-
-      <span>
-        AND THEN
-      </span>
-
-      <h3>
-        Someone is floating
-        above it all.
-      </h3>
-
-    `;
-
-    spaceButton.textContent =
-      "one more time";
-
-  }
-
-
-  else {
-
-    spaceText.innerHTML = `
-
-      <span>
-        YOUR UNIVERSE
-      </span>
-
-      <h3>
-        Infinite,
-        just like curiosity.
-      </h3>
-
-    `;
-
-    spaceButton.style.display =
-      "none";
-
-  }
-
-});
-
-
-/* =====================================================
-   FINAL — THREE STEPS
-===================================================== */
-
-const finalSteps =
-  document.querySelectorAll(".final-step");
-
-const mergeButton =
-  document.getElementById(
-    "mergeButton"
-  );
-
-const canonArea =
-  document.getElementById(
-    "canonArea"
-  );
-
-let finalIndex = 0;
-
-
-mergeButton.addEventListener("click", () => {
-
-  finalSteps[finalIndex]
-    .classList
-    .remove("active");
-
-  finalIndex++;
-
-
-  if (finalIndex < finalSteps.length) {
-
-    finalSteps[finalIndex]
-      .classList
-      .add("active");
-
-  }
-
-
-  if (finalIndex === finalSteps.length - 1) {
-
-    mergeButton.textContent =
-      "let it play";
-
-  }
-
-
-  if (finalIndex >= finalSteps.length) {
-
-    mergeButton.style.display =
-      "none";
-
-    canonArea.classList.add("show");
-
-  }
-
-});
-
-
-/* =====================================================
-   CANON IN D
-===================================================== */
+/* ==========================================
+CANON
+========================================== */
 
 const canon =
-  document.getElementById("canon");
+document.getElementById("canon");
 
 const canonButton =
-  document.getElementById(
-    "canonButton"
-  );
-
-const finalMessage =
-  document.getElementById(
-    "finalMessage"
-  );
-
+document.getElementById(
+"canonButton"
+);
 
 canonButton.addEventListener(
-  "click",
-  async () => {
+"click",
+async () => {
 
-    if (canon.paused) {
+if (canon.paused) {  
 
-      canon.currentTime = 110;
+  canon.currentTime = 110;  
 
-      try {
+  try {  
 
-        await canon.play();
+    await canon.play();  
 
-      } catch(error) {
+    canonButton.innerHTML = `  
+      ✦  
+      <span>playing...</span>  
+    `;  
 
-        console.log(error);
+  } catch(error) {  
 
-      }
+    console.log(error);  
 
-      canonButton.innerHTML = `
-        ✦
-        <span>
-          playing...
-        </span>
-      `;
+  }  
 
+} else {  
 
-      /*
-        Give the music a few seconds
-        before revealing the final words.
-      */
+  canon.pause();  
 
-      setTimeout(() => {
+  canonButton.innerHTML = `  
+    ✦  
+    <span>let it play</span>  
+  `;  
 
-        finalMessage.classList.add(
-          "show"
-        );
+}
 
-      }, 4500);
-
-
-    } else {
-
-      canon.pause();
-
-      canonButton.innerHTML = `
-        ✦
-        <span>
-          let it play
-        </span>
-      `;
-
-    }
-
-  }
+}
 );
 
+/* ==========================================
+DON'T PLAY BOTH SONGS
+========================================== */
 
-/* =====================================================
-   SUBTLE PARALLAX
-===================================================== */
+song.addEventListener(
+"play",
+() => {
 
-window.addEventListener(
-  "mousemove",
-  event => {
+canon.pause();
 
-    const x =
-      (event.clientX /
-        window.innerWidth -
-        .5) * 8;
-
-    const y =
-      (event.clientY /
-        window.innerHeight -
-        .5) * 8;
-
-    document
-      .querySelector(".memory-photo")
-      ?.style.setProperty(
-        "transform",
-        `translate(${x * .25}px, ${y * .25}px)`
-      );
-
-  }
+}
 );
 
+canon.addEventListener(
+"play",
+() => {
 
-/* =====================================================
-   PREVENT SONG + CANON PLAYING TOGETHER
-===================================================== */
+song.pause();
 
-song.addEventListener("play", () => {
+}
+);
 
-  canon.pause();
+/* ==========================================
+PRELOAD NEXT IMAGES
+========================================== */
 
-});
+const images = [
+"flowerhorn.jpg",
+"oscar-blackey.jpg",
+"oscar-lemon.jpg",
+"betta.jpg",
+"tanks-setup.jpg",
+"drawing-01.jpg",
+"drawing-02.jpg",
+"drawing-03.jpg",
+"drawing-04.jpg",
+"1000228743.jpg",
+"1000228745.jpg"
+];
 
-canon.addEventListener("play", () => {
+images.forEach(src => {
 
-  song.pause();
+const image =
+new Image();
 
-});
+image.src = src;
+
+}); دا css
