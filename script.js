@@ -1,85 +1,82 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
 
-  /* ==========================================
-     PAGES
-  ========================================== */
+  /* =========================
+     PAGE NAVIGATION
+  ========================= */
 
   const pages = document.querySelectorAll(".page");
-  const buttons = document.querySelectorAll("[data-next]");
-  const pageCounter = document.getElementById("currentPage");
+  const nextButtons = document.querySelectorAll("[data-next]");
+  const currentPage = document.getElementById("currentPage");
 
-  let currentPageIndex = 0;
+  let current = 0;
 
   function showPage(index) {
 
-    if (index < 0 || index >= pages.length) {
-      return;
-    }
+    if (index < 0 || index >= pages.length) return;
 
-    pages.forEach(function (page) {
+    pages.forEach(page => {
       page.classList.remove("active");
     });
 
     pages[index].classList.add("active");
 
-    currentPageIndex = index;
+    current = index;
 
-    if (pageCounter) {
-      pageCounter.textContent =
-        String(index + 1).padStart(2, "0");
+    if (currentPage) {
+      currentPage.textContent =
+        String(current + 1).padStart(2, "0");
     }
   }
 
 
-  /* ==========================================
+  /* =========================
      NEXT BUTTONS
-  ========================================== */
+  ========================= */
 
-  buttons.forEach(function (button) {
+  nextButtons.forEach(button => {
 
-    button.addEventListener("click", function (event) {
+    button.addEventListener("click", event => {
 
       event.preventDefault();
-      event.stopPropagation();
 
-      showPage(currentPageIndex + 1);
+      showPage(current + 1);
 
     });
 
   });
 
 
-  /* ==========================================
+  /* =========================
      KEYBOARD
-  ========================================== */
+  ========================= */
 
-  document.addEventListener("keydown", function (event) {
+  document.addEventListener("keydown", event => {
 
     if (
       event.key === "ArrowRight" ||
       event.key === "Enter"
     ) {
-      showPage(currentPageIndex + 1);
+      showPage(current + 1);
     }
 
     if (event.key === "ArrowLeft") {
-      showPage(currentPageIndex - 1);
+      showPage(current - 1);
     }
 
   });
 
 
-  /* ==========================================
+  /* =========================
      SWIPE
-  ========================================== */
+  ========================= */
 
-  let startX = 0;
+  let touchStartX = 0;
 
   document.addEventListener(
     "touchstart",
-    function (event) {
+    event => {
 
-      startX =
+      touchStartX =
         event.changedTouches[0].screenX;
 
     },
@@ -89,22 +86,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document.addEventListener(
     "touchend",
-    function (event) {
+    event => {
 
-      const endX =
+      const touchEndX =
         event.changedTouches[0].screenX;
 
       const difference =
-        startX - endX;
+        touchStartX - touchEndX;
 
-      if (Math.abs(difference) < 60) {
-        return;
-      }
+      if (Math.abs(difference) < 60) return;
 
       if (difference > 0) {
-        showPage(currentPageIndex + 1);
+        showPage(current + 1);
       } else {
-        showPage(currentPageIndex - 1);
+        showPage(current - 1);
       }
 
     },
@@ -112,197 +107,215 @@ document.addEventListener("DOMContentLoaded", function () {
   );
 
 
-  /* ==========================================
-     SONG
-  ========================================== */
+  /* =========================
+     YOUR SONG
+  ========================= */
 
-  const song =
-    document.getElementById("song");
-
-  const songButton =
-    document.getElementById("songButton");
+  const song = document.getElementById("song");
+  const songButton = document.getElementById("songButton");
 
 
   if (song && songButton) {
 
-    songButton.addEventListener(
-      "click",
-      async function () {
+    song.preload = "auto";
 
-        if (song.paused) {
+    songButton.addEventListener("click", async () => {
 
-          song.currentTime = 20;
+      if (song.paused) {
 
-          try {
+        /*
+          Your song starts at 00:20
+          and stops at 00:30
+        */
 
-            await song.play();
+        song.currentTime = 20;
 
-            songButton.textContent = "Ⅱ";
+        try {
 
-          } catch (error) {
+          await song.play();
 
-            console.error(
-              "Song error:",
-              error
-            );
+          songButton.textContent = "Ⅱ";
 
-          }
+        } catch (error) {
 
-        } else {
-
-          song.pause();
-
-          songButton.textContent = "♫";
+          console.error("Song error:", error);
 
         }
 
-      }
-    );
+      } else {
 
+        song.pause();
 
-    song.addEventListener(
-      "timeupdate",
-      function () {
-
-        if (song.currentTime >= 30) {
-
-          song.pause();
-
-          song.currentTime = 20;
-
-          songButton.textContent = "↻";
-
-        }
+        songButton.textContent = "♫";
 
       }
-    );
+
+    });
+
+
+    song.addEventListener("timeupdate", () => {
+
+      if (song.currentTime >= 30) {
+
+        song.pause();
+
+        song.currentTime = 20;
+
+        songButton.textContent = "↻";
+
+      }
+
+    });
 
   }
 
 
-  /* ==========================================
+  /* =========================
      CANON IN D
-  ========================================== */
+  ========================= */
 
-  const canon =
-    document.getElementById("canon");
-
-  const canonButton =
-    document.getElementById("canonButton");
+  const canon = document.getElementById("canon");
+  const canonButton = document.getElementById("canonButton");
 
 
   if (canon && canonButton) {
 
-    canonButton.addEventListener(
-      "click",
-      async function () {
+    canon.preload = "auto";
 
-        if (canon.paused) {
+    canonButton.addEventListener("click", async () => {
 
-          canon.currentTime = 110;
+      /*
+        PLAY
+      */
 
-          try {
+      if (canon.paused) {
 
-            await canon.play();
+        try {
 
-            canonButton.innerHTML =
-              "✦<span>playing...</span>";
+          /*
+            IMPORTANT:
+            No currentTime = 110 here.
+            Canon starts normally.
+          */
 
-          } catch (error) {
+          await canon.play();
 
-            console.error(
-              "Canon error:",
-              error
-            );
+          canonButton.innerHTML = `
+            ✦
+            <span>playing...</span>
+          `;
 
-          }
+        } catch (error) {
 
-        } else {
-
-          canon.pause();
-
-          canonButton.innerHTML =
-            "✦<span>let it play</span>";
+          console.error(
+            "Canon playback error:",
+            error
+          );
 
         }
 
       }
-    );
 
+      /*
+        PAUSE
+      */
 
-    canon.addEventListener(
-      "ended",
-      function () {
-
-        canonButton.innerHTML =
-          "✦<span>play again</span>";
-
-      }
-    );
-
-  }
-
-
-  /* ==========================================
-     STOP OTHER MUSIC
-  ========================================== */
-
-  if (song && canon) {
-
-    song.addEventListener(
-      "play",
-      function () {
+      else {
 
         canon.pause();
 
-        if (canonButton) {
-
-          canonButton.innerHTML =
-            "✦<span>let it play</span>";
-
-        }
+        canonButton.innerHTML = `
+          ✦
+          <span>let it play</span>
+        `;
 
       }
-    );
+
+    });
 
 
-    canon.addEventListener(
-      "play",
-      function () {
+    /*
+      When Canon finishes
+    */
 
-        song.pause();
+    canon.addEventListener("ended", () => {
 
-        if (songButton) {
-          songButton.textContent = "♫";
-        }
+      canonButton.innerHTML = `
+        ✦
+        <span>play again</span>
+      `;
 
-      }
-    );
+    });
 
   }
 
 
-  /* ==========================================
+  /* =========================
+     NEVER PLAY BOTH
+  ========================= */
+
+  if (song && canon) {
+
+    song.addEventListener("play", () => {
+
+      if (!canon.paused) {
+        canon.pause();
+      }
+
+      if (canonButton) {
+
+        canonButton.innerHTML = `
+          ✦
+          <span>let it play</span>
+        `;
+
+      }
+
+    });
+
+
+    canon.addEventListener("play", () => {
+
+      if (!song.paused) {
+        song.pause();
+      }
+
+      if (songButton) {
+        songButton.textContent = "♫";
+      }
+
+    });
+
+  }
+
+
+  /* =========================
      PRELOAD IMAGES
-  ========================================== */
+  ========================= */
 
   const images = [
+
     "martina-childhood.jpg",
+
     "flowerhorn.jpg",
     "oscar-blackey.jpg",
     "oscar-lemon.jpg",
     "betta.jpg",
+
     "tanks-setup.jpg",
+
     "drawing-01.jpg",
     "drawing-02.jpg",
     "drawing-03.jpg",
     "drawing-04.jpg",
+
     "1000228743.jpg",
     "1000228745.jpg"
+
   ];
 
 
-  images.forEach(function (src) {
+  images.forEach(src => {
 
     const img = new Image();
 
@@ -311,9 +324,9 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
-  /* ==========================================
-     START
-  ========================================== */
+  /* =========================
+     INITIAL PAGE
+  ========================= */
 
   showPage(0);
 
