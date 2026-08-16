@@ -5,286 +5,282 @@
 }
 
 :root {
-  --bg: #061013;
-  --bg-soft: #0b1a1e;
-
-  --white: #edf5f2;
-  --muted: #829693;
-
-  --green: #9bc4bc;
-  --gold: #d7be88;
-
-  --line: rgba(210, 230, 225, .13);
+  --bg: #050d10;
+  --bg2: #0a171b;
+  --white: #edf4f1;
+  --muted: #819491;
+  --green: #9fc9c0;
+  --gold: #d5bd87;
+  --line: rgba(220,240,235,.12);
 }
 
-html {
-  scroll-behavior: smooth;
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
 body {
-
   background:
     radial-gradient(
-      circle at 50% -20%,
-      #1b3940 0%,
-      #0b1b20 32%,
-      #061013 72%
+      circle at 50% 30%,
+      #173136,
+      #071114 65%,
+      #03080a
     );
 
   color: var(--white);
 
-  font-family:
-    "Inter",
-    sans-serif;
-
-  line-height: 1.6;
-
-  overflow-x: hidden;
+  font-family: "Inter", sans-serif;
 }
 
 
 /* =========================
-   AMBIENT BACKGROUND
+   PAGE SYSTEM
 ========================= */
 
-.stars {
-
-  position: fixed;
+.page {
+  position: absolute;
 
   inset: 0;
 
-  z-index: -5;
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 50px 6vw;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  transform:
+    scale(1.04)
+    translateY(20px);
+
+  transition:
+    opacity 1s ease,
+    transform 1.2s cubic-bezier(.2,.7,.2,1),
+    visibility 1s;
+
+  overflow: hidden;
+}
+
+.page.active {
+
+  opacity: 1;
+
+  visibility: visible;
+
+  transform:
+    scale(1)
+    translateY(0);
+
+  z-index: 5;
+}
+
+.page-content {
+
+  width: min(900px, 100%);
+
+  text-align: center;
+}
+
+.page-content.wide {
+
+  width: min(1150px, 100%);
+}
+
+
+/* =========================
+   BACKGROUND
+========================= */
+
+.page::before {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
 
   pointer-events: none;
 
-  opacity: .28;
-
-  background-image:
-
+  background:
     radial-gradient(
-      #ffffff 1px,
-      transparent 1px
+      circle at 20% 20%,
+      rgba(100,170,160,.09),
+      transparent 30%
     ),
 
     radial-gradient(
-      #9bc4bc 1px,
-      transparent 1px
+      circle at 80% 80%,
+      rgba(210,180,120,.07),
+      transparent 30%
     );
-
-  background-size:
-    120px 120px,
-    190px 190px;
-
-  animation:
-    starMove 45s linear infinite;
-}
-
-@keyframes starMove {
-
-  to {
-
-    background-position:
-      120px 120px,
-      -190px -190px;
-
-  }
-
-}
-
-
-.ambient {
-
-  position: fixed;
-
-  width: 450px;
-  height: 450px;
-
-  border-radius: 50%;
-
-  filter: blur(130px);
-
-  pointer-events: none;
-
-  z-index: -4;
-
-  opacity: .14;
-}
-
-.ambient-a {
-
-  background: #4d9990;
-
-  top: 10%;
-  left: -250px;
-}
-
-.ambient-b {
-
-  background: #9b784b;
-
-  right: -250px;
-  bottom: 10%;
 }
 
 
 /* =========================
-   PROGRESS
+   TYPOGRAPHY
 ========================= */
 
-.progress {
-
-  position: fixed;
-
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 2px;
-
-  z-index: 100;
-}
-
-.progress span {
+.eyebrow {
 
   display: block;
 
-  width: 0;
-  height: 100%;
+  color: var(--gold);
 
-  background:
-    linear-gradient(
-      90deg,
-      var(--green),
-      var(--gold)
-    );
+  font-size: 8px;
+
+  letter-spacing: .35em;
+
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3 {
+
+  font-family:
+    "Cormorant Garamond",
+    serif;
+
+  font-weight: 500;
+}
+
+h1 {
+
+  font-size:
+    clamp(60px, 9vw, 110px);
+
+  line-height: .9;
+}
+
+h2 {
+
+  font-size:
+    clamp(48px, 7vw, 85px);
+
+  line-height: .9;
+}
+
+em {
+
+  color: var(--green);
+
+  font-style: italic;
+}
+
+p {
+
+  color: var(--muted);
+
+  font-size: 13px;
+
+  line-height: 1.9;
 }
 
 
 /* =========================
-   INTRO
+   CHILDHOOD
 ========================= */
 
-.intro {
+.childhood {
 
-  min-height: 100vh;
+  display: flex;
 
-  display: grid;
+  flex-direction: column;
 
-  place-items: center;
-
-  text-align: center;
-
-  padding: 80px 20px;
+  align-items: center;
 }
 
-.intro-content {
+.photo-frame {
 
-  width: 100%;
-  max-width: 700px;
-}
-
-.memory-photo {
-
-  width: min(320px, 76vw);
-
-  margin: auto;
+  width: min(310px, 72vw);
 
   padding: 8px;
 
-  border-radius: 25px;
+  border-radius: 22px;
 
   border:
     1px solid
-    rgba(215,190,136,.35);
+    rgba(213,189,135,.3);
 
   background:
     rgba(255,255,255,.025);
 
   box-shadow:
-    0 40px 100px
-    rgba(0,0,0,.5);
+    0 40px 120px
+    rgba(0,0,0,.55);
 }
 
-.memory-photo img {
-
-  width: 100%;
+.photo-frame img {
 
   display: block;
+
+  width: 100%;
 
   aspect-ratio: 4 / 5;
 
   object-fit: cover;
 
-  border-radius: 17px;
-
-  filter:
-    saturate(.9)
-    contrast(.95);
-
+  border-radius: 15px;
 }
 
-.photo-caption {
+.private-words {
 
-  margin-top: 15px;
+  margin-top: 25px;
+
+  font-family:
+    "Cormorant Garamond",
+    serif;
+}
+
+.word-line {
+
+  font-size: 23px;
 
   color: var(--green);
 
-  font:
-    italic 400 22px
-    "Cormorant Garamond",
-    serif;
+  font-style: italic;
+
+  margin: 3px;
 }
 
-.intro-secret {
+.word-line.secret {
 
-  min-height: 65px;
+  color: var(--gold);
 
-  display: grid;
-
-  place-items: center;
-
-  margin-top: 12px;
+  font-size: 26px;
 }
 
-.intro-secret span {
 
-  opacity: 0;
+/* =========================
+   BUTTON
+========================= */
 
-  transition:
-    opacity .8s,
-    transform .8s;
+.continue {
 
-  transform: translateY(8px);
+  margin-top: 45px;
 
-  font:
-    italic 400 28px
-    "Cormorant Garamond",
-    serif;
-}
-
-.intro-secret span.show {
-
-  opacity: 1;
-
-  transform:
-    translateY(0);
-}
-
-.main-tap {
-
-  width: 55px;
-  height: 55px;
-
-  border-radius: 50%;
+  padding:
+    12px 23px;
 
   border:
     1px solid
-    rgba(215,190,136,.35);
+    var(--line);
+
+  border-radius: 100px;
+
+  color: #d8e3e0;
 
   background:
-    rgba(215,190,136,.06);
-
-  color: var(--gold);
+    rgba(255,255,255,.025);
 
   cursor: pointer;
 
@@ -292,16 +288,16 @@ body {
     .4s;
 }
 
-.main-tap:hover {
+.continue:hover {
 
   transform:
-    scale(1.12);
+    translateX(6px);
 
-  background:
-    rgba(215,190,136,.13);
+  border-color:
+    rgba(159,201,192,.4);
 }
 
-.main-tap span {
+.continue span {
 
   font-size: 9px;
 
@@ -310,265 +306,11 @@ body {
   text-transform: uppercase;
 }
 
-.intro-title {
+.continue b {
 
-  margin-top: 45px;
-}
-
-.tiny-label,
-.chapter,
-.final-label {
-
-  font-size: 8px;
-
-  letter-spacing: .3em;
+  margin-left: 10px;
 
   color: var(--gold);
-
-  text-transform: uppercase;
-}
-
-.intro-title h1 {
-
-  margin-top: 17px;
-
-  font:
-    500 clamp(65px, 10vw, 105px) / .82
-    "Cormorant Garamond",
-    serif;
-}
-
-.intro-title h1 em {
-
-  color: var(--green);
-
-  font-style: italic;
-}
-
-.intro-title p {
-
-  margin-top: 25px;
-
-  color: var(--muted);
-
-  font-size: 13px;
-}
-
-
-/* =========================
-   SECTION
-========================= */
-
-.world-section,
-.space-world {
-
-  max-width: 1200px;
-
-  margin: auto;
-
-  padding:
-    150px 5vw;
-}
-
-.section-heading {
-
-  max-width: 700px;
-
-  margin:
-    0 auto 65px;
-
-  text-align: center;
-}
-
-.section-heading h2 {
-
-  margin-top: 15px;
-
-  font:
-    500 clamp(58px, 8vw, 92px) / .85
-    "Cormorant Garamond",
-    serif;
-}
-
-.section-heading h2 em {
-
-  color: var(--green);
-
-  font-style: italic;
-}
-
-.section-heading p {
-
-  margin-top: 20px;
-
-  color: var(--muted);
-
-  font-size: 13px;
-}
-
-
-/* =========================
-   FISH
-========================= */
-
-.fish-grid {
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(4, 1fr);
-
-  gap: 16px;
-}
-
-.fish-card {
-
-  height: 420px;
-
-  perspective: 1200px;
-
-  cursor: pointer;
-}
-
-.fish-inner {
-
-  width: 100%;
-  height: 100%;
-
-  position: relative;
-
-  transform-style:
-    preserve-3d;
-
-  transition:
-    transform .9s
-    cubic-bezier(.2,.75,.2,1);
-}
-
-.fish-card.flipped
-.fish-inner {
-
-  transform:
-    rotateY(180deg);
-}
-
-.fish-front,
-.fish-back {
-
-  position: absolute;
-
-  inset: 0;
-
-  backface-visibility:
-    hidden;
-
-  overflow: hidden;
-
-  border-radius: 22px;
-
-  border:
-    1px solid
-    var(--line);
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(30,58,62,.8),
-      rgba(7,19,23,.9)
-    );
-}
-
-.fish-front {
-
-  display: grid;
-
-  place-items: center;
-
-  text-align: center;
-}
-
-.fish-number {
-
-  position: absolute;
-
-  top: 20px;
-  left: 20px;
-
-  font-size: 9px;
-
-  color: var(--gold);
-
-  letter-spacing: .2em;
-}
-
-.fish-question {
-
-  font:
-    500 100px
-    "Cormorant Garamond",
-    serif;
-
-  color:
-    rgba(215,190,136,.55);
-}
-
-.fish-front small {
-
-  position: absolute;
-
-  bottom: 22px;
-
-  color: var(--muted);
-
-  font-size: 8px;
-
-  letter-spacing: .25em;
-
-  text-transform: uppercase;
-}
-
-.fish-back {
-
-  transform:
-    rotateY(180deg);
-}
-
-.fish-back img {
-
-  width: 100%;
-
-  height: 250px;
-
-  object-fit: cover;
-}
-
-.fish-info {
-
-  padding: 18px;
-}
-
-.fish-info span {
-
-  color: var(--gold);
-
-  font-size: 7px;
-
-  letter-spacing: .25em;
-}
-
-.fish-info h3 {
-
-  font:
-    500 32px
-    "Cormorant Garamond",
-    serif;
-}
-
-.fish-info p {
-
-  color: var(--muted);
-
-  font-size: 11px;
 }
 
 
@@ -576,133 +318,133 @@ body {
    AQUARIUM
 ========================= */
 
-.aquarium {
+.intro-text {
+
+  margin-top: 30px;
+}
+
+.fish-grid {
+
+  margin-top: 45px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 15px;
+}
+
+.fish-card {
 
   position: relative;
 
-  margin-top: 35px;
+  height: 330px;
 
   overflow: hidden;
 
-  border-radius: 25px;
+  border-radius: 20px;
 
   border:
     1px solid
     var(--line);
+
+  background: #0b171a;
+
+  transition:
+    transform .5s;
 }
 
-.aquarium > img {
+.fish-card:hover {
 
-  display: block;
+  transform:
+    translateY(-8px);
+}
+
+.fish-card img {
 
   width: 100%;
 
-  max-height: 550px;
+  height: 235px;
 
   object-fit: cover;
 }
 
-.aquarium-cover {
+.fish-card div {
 
-  position: absolute;
+  padding: 13px;
 
-  inset: 0;
-
-  z-index: 3;
-
-  display: grid;
-
-  place-items: center;
-
-  text-align: center;
-
-  background:
-    linear-gradient(
-      rgba(3,13,16,.88),
-      rgba(3,13,16,.68)
-    );
-
-  transition:
-    1.2s;
+  text-align: left;
 }
 
-.aquarium-cover.open {
-
-  opacity: 0;
-
-  pointer-events: none;
-}
-
-.aquarium-cover span {
-
-  font:
-    italic 400 28px
-    "Cormorant Garamond",
-    serif;
-
-  color: #cad8d4;
-}
-
-.aquarium-cover button {
-
-  display: block;
-
-  margin:
-    20px auto 0;
-
-  padding:
-    12px 26px;
-
-  border:
-    1px solid
-    var(--line);
-
-  border-radius: 100px;
-
-  color: white;
-
-  background:
-    rgba(255,255,255,.04);
-
-  cursor: pointer;
-}
-
-.aquarium-caption {
-
-  position: absolute;
-
-  bottom: 0;
-
-  left: 0;
-  right: 0;
-
-  padding:
-    100px 30px 25px;
-
-  background:
-    linear-gradient(
-      transparent,
-      rgba(0,0,0,.85)
-    );
-}
-
-.aquarium-caption span {
+.fish-card small {
 
   color: var(--gold);
 
   font-size: 7px;
 
-  letter-spacing: .3em;
+  letter-spacing: .25em;
 }
 
-.aquarium-caption h3 {
+.fish-card h3 {
 
-  margin-top: 5px;
+  font-size: 27px;
+
+  margin-top: 3px;
+}
+
+
+/* =========================
+   AQUARIUM IMAGE
+========================= */
+
+.large-image {
+
+  width: min(900px, 100%);
+
+  margin: auto;
+
+  border-radius: 25px;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    var(--line);
+
+  box-shadow:
+    0 35px 100px
+    rgba(0,0,0,.4);
+}
+
+.large-image img {
+
+  width: 100%;
+
+  display: block;
+
+  max-height: 62vh;
+
+  object-fit: cover;
+}
+
+.quote {
+
+  margin-top: 30px;
+
+  color: #cddbd7;
 
   font:
-    500 35px
+    italic 400 28px / 1.2
     "Cormorant Garamond",
     serif;
+}
+
+.quote span {
+
+  color: var(--gold);
+
+  font-size: 50px;
 }
 
 
@@ -710,36 +452,31 @@ body {
    ART
 ========================= */
 
-.art-world {
-
-  padding-top: 100px;
-}
-
 .art-grid {
 
   display: grid;
 
   grid-template-columns:
-    repeat(2,1fr);
+    repeat(4,1fr);
 
-  gap: 18px;
+  gap: 14px;
+
+  margin-top: 45px;
 }
 
 .art-card {
 
   position: relative;
 
-  height: 460px;
+  height: 370px;
 
   overflow: hidden;
 
-  border-radius: 22px;
+  border-radius: 18px;
 
   border:
     1px solid
     var(--line);
-
-  cursor: pointer;
 }
 
 .art-card img {
@@ -749,103 +486,33 @@ body {
 
   object-fit: cover;
 
-  transform:
-    scale(.96);
-
-  filter:
-    brightness(.25)
-    saturate(.6);
-
   transition:
-    1.2s
-    cubic-bezier(.2,.75,.2,1);
+    transform 1s;
 }
 
-.art-card.open img {
+.art-card:hover img {
 
   transform:
-    scale(1);
-
-  filter:
-    brightness(1)
-    saturate(1);
+    scale(1.05);
 }
 
-.art-cover {
+.art-card span {
 
   position: absolute;
 
-  inset: 0;
+  top: 15px;
+  left: 15px;
 
-  z-index: 3;
+  padding: 5px 9px;
 
-  display: grid;
-
-  place-items: center;
-
-  align-content: center;
+  border-radius: 50px;
 
   background:
-    rgba(5,15,18,.45);
+    rgba(0,0,0,.45);
 
-  transition:
-    1s;
-}
-
-.art-card.open
-.art-cover {
-
-  opacity: 0;
-
-  pointer-events: none;
-}
-
-.art-cover span {
-
-  font:
-    500 80px
-    "Cormorant Garamond",
-    serif;
-
-  color:
-    rgba(215,190,136,.55);
-}
-
-.art-cover small {
-
-  margin-top: 5px;
-
-  color: var(--muted);
+  color: white;
 
   font-size: 8px;
-
-  letter-spacing: .3em;
-}
-
-.art-caption {
-
-  position: absolute;
-
-  bottom: 22px;
-  left: 22px;
-
-  z-index: 4;
-
-  font:
-    500 25px
-    "Cormorant Garamond",
-    serif;
-
-  opacity: 0;
-
-  transition:
-    .8s;
-}
-
-.art-card.open
-.art-caption {
-
-  opacity: 1;
 }
 
 
@@ -853,114 +520,83 @@ body {
    MUSIC
 ========================= */
 
-.music-section {
-
-  max-width: 900px;
-
-  margin: auto;
-
-  padding:
-    80px 5vw;
-}
-
-.music-card {
-
-  text-align: center;
-
-  padding:
-    70px 25px;
-
-  border-radius: 30px;
-
-  border:
-    1px solid
-    var(--line);
+.music-page {
 
   background:
-    rgba(14,30,34,.55);
-
-  backdrop-filter:
-    blur(20px);
+    radial-gradient(
+      circle at center,
+      rgba(155,196,188,.08),
+      transparent 45%
+    );
 }
 
-.music-card > span {
+.music-page h2 {
 
-  color: var(--gold);
-
-  font-size: 8px;
-
-  letter-spacing: .3em;
+  margin-top: 20px;
 }
 
-.music-card h2 {
+.arabic {
 
-  margin-top: 12px;
-
-  font:
-    500 65px
-    "Cormorant Garamond",
-    serif;
-}
-
-.music-card p {
-
-  color: var(--muted);
-
-  font:
-    italic 400 18px
-    "Cormorant Garamond",
-    serif;
+  max-width: 500px;
 
   margin:
-    10px 0 28px;
+    30px auto 10px;
+
+  font:
+    italic 400 21px
+    "Cormorant Garamond",
+    serif;
 }
 
-#songButton,
-#canonButton {
+.small-note {
 
-  display: inline-flex;
+  font-size: 10px;
 
-  align-items: center;
+  color: #627572;
+}
 
-  gap: 10px;
+.music-button,
+.canon-button {
 
-  padding:
-    14px 25px;
+  width: 75px;
+  height: 75px;
 
-  border-radius: 100px;
+  margin-top: 30px;
+
+  border-radius: 50%;
 
   border:
     1px solid
-    rgba(155,196,188,.3);
-
-  color: white;
+    rgba(213,189,135,.35);
 
   background:
-    rgba(155,196,188,.06);
+    rgba(213,189,135,.06);
+
+  color: var(--gold);
 
   cursor: pointer;
 
   transition:
-    .4s;
+    .5s;
 }
 
-#songButton:hover,
-#canonButton:hover {
+.music-button:hover,
+.canon-button:hover {
 
   transform:
-    translateY(-3px);
+    scale(1.1);
 
   background:
-    rgba(155,196,188,.13);
+    rgba(213,189,135,.13);
 }
 
-.music-card > small {
+.time {
 
   display: block;
 
-  margin-top: 12px;
+  margin-top: 10px;
 
-  color: #607572;
+  color: #526663;
 
   font-size: 8px;
 
@@ -972,320 +608,360 @@ body {
    SPACE
 ========================= */
 
-.space-experience {
+.space-page,
+.iss-page {
 
-  height: 620px;
+  justify-content: flex-start;
 
-  position: relative;
-
-  overflow: hidden;
-
-  border-radius: 25px;
-
-  border:
-    1px solid
-    var(--line);
-
-  background: #02080a;
+  text-align: left;
 }
 
-.galaxy,
-.iss {
+.space-image,
+.iss-image {
 
   position: absolute;
 
   inset: 0;
 
-  transition:
-    2s;
+  z-index: -1;
 }
 
-.galaxy {
+.space-image::after,
+.iss-image::after {
 
-  opacity: .15;
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(2,7,10,.95),
+      rgba(2,7,10,.45),
+      rgba(2,7,10,.15)
+    );
 }
 
-.iss {
-
-  opacity: 0;
-}
-
-.galaxy img,
-.iss img {
+.space-image img,
+.iss-image img {
 
   width: 100%;
   height: 100%;
 
   object-fit: cover;
+
+  opacity: .75;
 }
 
-.space-experience.stage-one
-.galaxy {
-
-  opacity: 1;
-}
-
-.space-experience.stage-two
-.iss {
-
-  opacity: 1;
-}
-
-.space-overlay {
-
-  position: absolute;
-
-  inset: 0;
-
-  z-index: 4;
-
-  display: grid;
-
-  place-items: center;
-
-  align-content: center;
-
-  text-align: center;
-
-  background:
-    radial-gradient(
-      circle,
-      transparent 10%,
-      rgba(0,0,0,.45)
-    );
-}
-
-.space-overlay span {
-
-  color: var(--gold);
-
-  font-size: 8px;
-
-  letter-spacing: .3em;
-}
-
-.space-overlay h3 {
+.space-content {
 
   max-width: 600px;
 
-  margin-top: 12px;
-
-  font:
-    500 clamp(45px,7vw,75px)
-    "Cormorant Garamond",
-    serif;
+  margin-left: 5vw;
 }
 
-#spaceButton {
+.space-content h1 {
 
-  margin-top: 25px;
+  margin-top: 20px;
+}
 
-  padding:
-    12px 28px;
+.space-content p {
 
-  border:
-    1px solid
-    var(--line);
+  margin-top: 30px;
 
-  border-radius: 100px;
-
-  color: white;
-
-  background:
-    rgba(255,255,255,.06);
-
-  cursor: pointer;
+  max-width: 450px;
 }
 
 
 /* =========================
-   FINAL
+   MERGE
 ========================= */
 
-.final-section {
+.merge-page {
 
-  min-height: 100vh;
-
-  position: relative;
-
-  display: grid;
-
-  place-items: center;
-
-  text-align: center;
-
-  padding: 130px 20px;
-
-  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at center,
+      #132f31,
+      #050d10 65%
+    );
 }
 
-.merge-background {
+.merge-stars {
 
   position: absolute;
 
   inset: 0;
 
-  background:
+  opacity: .3;
+
+  background-image:
     radial-gradient(
-      circle at center,
-      rgba(74,130,122,.2),
-      transparent 50%
+      white 1px,
+      transparent 1px
     );
 
-  transition:
-    3s;
+  background-size:
+    100px 100px;
+
+  animation:
+    stars 25s linear infinite;
 }
 
-.final-content {
+@keyframes stars {
+
+  to {
+    background-position:
+      100px 100px;
+  }
+}
+
+.merge-content {
 
   position: relative;
 
   z-index: 2;
 
-  width: 100%;
+  max-width: 800px;
 
-  max-width: 850px;
+  text-align: center;
 }
 
-.final-step {
+.merge-line {
 
-  display: none;
-}
+  margin:
+    35px auto;
 
-.final-step.active {
-
-  display: block;
-
-  animation:
-    finalAppear 1.2s ease;
-}
-
-.final-step h2 {
-
-  margin-top: 25px;
+  max-width: 550px;
 
   font:
-    500 clamp(60px,9vw,105px) / .9
+    italic 400 27px
     "Cormorant Garamond",
     serif;
+
+  color: #b8c9c5;
 }
 
-@keyframes finalAppear {
+.second-merge h2 {
 
-  from {
+  color: var(--green);
 
-    opacity: 0;
-
-    transform:
-      translateY(25px);
-
-  }
-
-  to {
-
-    opacity: 1;
-
-    transform:
-      translateY(0);
-
-  }
+  margin-top: 30px;
 }
 
-.merge-button {
 
-  margin-top: 50px;
+/* =========================
+   FINAL MERGE
+========================= */
 
-  padding:
-    13px 28px;
-
-  border:
-    1px solid
-    var(--line);
-
-  border-radius: 100px;
+.final-merge {
 
   background:
-    rgba(255,255,255,.04);
-
-  color: white;
-
-  cursor: pointer;
+    #050b0d;
 }
 
-.canon-area {
+.water-layer,
+.star-layer {
 
-  display: none;
+  position: absolute;
 
-  margin-top: 55px;
+  inset: 0;
+
+  pointer-events: none;
 }
 
-.canon-area.show {
+.water-layer {
 
-  display: block;
+  background:
+    radial-gradient(
+      ellipse at 20% 80%,
+      rgba(56,120,118,.35),
+      transparent 40%
+    );
 
   animation:
-    finalAppear 1.5s ease;
+    breathe 7s ease-in-out infinite;
 }
 
-.canon-area small {
+.star-layer {
 
-  display: block;
+  opacity: .45;
 
-  margin-top: 12px;
+  background-image:
+    radial-gradient(
+      white 1px,
+      transparent 1px
+    );
 
-  color: #637572;
-
-  font-size: 8px;
-
-  letter-spacing: .2em;
+  background-size:
+    130px 130px;
 }
 
-.final-message {
+@keyframes breathe {
 
-  display: none;
-
-  margin-top: 70px;
+  50% {
+    transform:
+      scale(1.1);
+  }
 }
 
-.final-message.show {
+.final-merge-content {
 
-  display: block;
+  position: relative;
 
-  animation:
-    finalAppear 2s ease;
+  z-index: 2;
+
+  max-width: 800px;
+
+  text-align: center;
 }
 
-.final-line {
+.final-merge-content h1 {
+
+  margin-top: 25px;
+}
+
+.final-merge-content h2 {
+
+  color: var(--green);
+
+  margin-top: 20px;
+}
+
+.final-merge-content p {
+
+  margin-top: 40px;
 
   font:
-    italic 400 clamp(30px,5vw,52px) / 1.2
+    italic 400 20px
+    "Cormorant Garamond",
+    serif;
+}
+
+
+/* =========================
+   CONFESSION
+========================= */
+
+.confession-page {
+
+  background:
+    radial-gradient(
+      circle at center,
+      #122629,
+      #040b0d 70%
+    );
+}
+
+.confession-content {
+
+  max-width: 850px;
+
+  text-align: center;
+}
+
+.confession-content h1 {
+
+  margin-top: 30px;
+
+  font-size:
+    clamp(48px,7vw,85px);
+
+  line-height: .95;
+}
+
+.confession-content p {
+
+  max-width: 520px;
+
+  margin:
+    35px auto 0;
+
+  font:
+    italic 400 22px
     "Cormorant Garamond",
     serif;
 
-  color: #d6e0dd;
+  color: #a8bbb7;
 }
 
-.final-line.second {
+.canon-button {
+
+  display: inline-flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+.canon-button span {
+
+  margin-top: 3px;
+
+  font-size: 7px;
+
+  letter-spacing: .15em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================
+   LAST PAGE
+========================= */
+
+.last-page {
+
+  background:
+    radial-gradient(
+      circle at center,
+      #152e30,
+      #03090b 75%
+    );
+}
+
+.last-content {
+
+  text-align: center;
+
+  max-width: 800px;
+}
+
+.last-line {
+
+  font:
+    italic 400 clamp(34px,5vw,55px) / 1.1
+    "Cormorant Garamond",
+    serif;
+
+  color: #d8e2df;
+}
+
+.last-line.soft {
 
   margin-top: 25px;
 
   color: var(--green);
 }
 
-.final-symbol {
+.gold-star {
 
-  margin-top: 45px;
+  margin-top: 50px;
 
   color: var(--gold);
 
-  font-size: 20px;
+  font-size: 18px;
 }
 
-.private-ending {
+.private {
 
   margin-top: 45px;
 
-  color: #536966;
+  color: #536866;
 
   font:
     italic 400 18px
@@ -1297,23 +973,32 @@ body {
 
 
 /* =========================
-   FOOTER
+   PAGE NUMBER
 ========================= */
 
-footer {
+.page-number {
 
-  padding:
-    40px 20px;
+  position: fixed;
 
-  text-align: center;
+  right: 25px;
+  bottom: 25px;
 
-  color: #425552;
+  z-index: 100;
+
+  color: #637875;
 
   font-size: 8px;
 
-  letter-spacing: .25em;
+  letter-spacing: .15em;
+}
 
-  text-transform: uppercase;
+.page-number i {
+
+  margin: 0 5px;
+
+  color: var(--gold);
+
+  font-style: normal;
 }
 
 
@@ -1327,51 +1012,100 @@ footer {
 
     grid-template-columns:
       repeat(2,1fr);
+
+    gap: 10px;
   }
 
   .fish-card {
 
-    height: 370px;
+    height: 260px;
   }
 
-  .fish-back img {
+  .fish-card img {
 
-    height: 210px;
+    height: 175px;
   }
 
-  .space-experience {
+  .fish-card h3 {
 
-    height: 500px;
+    font-size: 22px;
   }
-}
 
-
-@media(max-width: 550px) {
-
-  .fish-grid,
   .art-grid {
 
-    grid-template-columns: 1fr;
-  }
-
-  .fish-card {
-
-    height: 400px;
+    grid-template-columns:
+      repeat(2,1fr);
   }
 
   .art-card {
 
-    height: 420px;
+    height: 270px;
   }
 
-  .intro-title h1 {
+  .space-content {
 
-    font-size: 68px;
+    margin-left: 0;
+
+    max-width: 90%;
+  }
+}
+
+@media(max-width: 500px) {
+
+  .page {
+
+    padding:
+      40px 22px;
   }
 
-  .aquarium-caption h3 {
+  .fish-grid {
 
-    font-size: 28px;
+    grid-template-columns:
+      repeat(2,1fr);
   }
 
+  .fish-card {
+
+    height: 235px;
+  }
+
+  .fish-card img {
+
+    height: 150px;
+  }
+
+  .fish-card div {
+
+    padding: 8px;
+  }
+
+  .fish-card h3 {
+
+    font-size: 19px;
+  }
+
+  .art-card {
+
+    height: 230px;
+  }
+
+  .word-line {
+
+    font-size: 20px;
+  }
+
+  .word-line.secret {
+
+    font-size: 23px;
+  }
+
+  .quote {
+
+    font-size: 23px;
+  }
+
+  .last-line {
+
+    font-size: 36px;
+  }
 }
