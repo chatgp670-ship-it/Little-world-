@@ -1,279 +1,320 @@
-/* ==========================================
-PAGE NAVIGATION
-========================================== */
+document.addEventListener("DOMContentLoaded", function () {
 
-const pages =
-document.querySelectorAll(".page");
+  /* ==========================================
+     PAGES
+  ========================================== */
 
-const nextButtons =
-document.querySelectorAll("[data-next]");
+  const pages = document.querySelectorAll(".page");
+  const buttons = document.querySelectorAll("[data-next]");
+  const pageCounter = document.getElementById("currentPage");
 
-const currentPage =
-document.getElementById("currentPage");
+  let currentPageIndex = 0;
 
-let current = 0;
+  function showPage(index) {
 
-function showPage(index) {
+    if (index < 0 || index >= pages.length) {
+      return;
+    }
 
-if (
-index < 0 ||
-index >= pages.length
-) {
-return;
-}
+    pages.forEach(function (page) {
+      page.classList.remove("active");
+    });
 
-pages[current]
-.classList
-.remove("active");
+    pages[index].classList.add("active");
 
-current = index;
+    currentPageIndex = index;
 
-pages[current]
-.classList
-.add("active");
+    if (pageCounter) {
+      pageCounter.textContent =
+        String(index + 1).padStart(2, "0");
+    }
+  }
 
-currentPage.textContent =
-String(current + 1)
-.padStart(2, "0");
 
-}
+  /* ==========================================
+     NEXT BUTTONS
+  ========================================== */
 
-nextButtons.forEach(button => {
+  buttons.forEach(function (button) {
 
-button.addEventListener("click", () => {
+    button.addEventListener("click", function (event) {
 
-showPage(current + 1);
+      event.preventDefault();
+      event.stopPropagation();
+
+      showPage(currentPageIndex + 1);
+
+    });
+
+  });
+
+
+  /* ==========================================
+     KEYBOARD
+  ========================================== */
+
+  document.addEventListener("keydown", function (event) {
+
+    if (
+      event.key === "ArrowRight" ||
+      event.key === "Enter"
+    ) {
+      showPage(currentPageIndex + 1);
+    }
+
+    if (event.key === "ArrowLeft") {
+      showPage(currentPageIndex - 1);
+    }
+
+  });
+
+
+  /* ==========================================
+     SWIPE
+  ========================================== */
+
+  let startX = 0;
+
+  document.addEventListener(
+    "touchstart",
+    function (event) {
+
+      startX =
+        event.changedTouches[0].screenX;
+
+    },
+    { passive: true }
+  );
+
+
+  document.addEventListener(
+    "touchend",
+    function (event) {
+
+      const endX =
+        event.changedTouches[0].screenX;
+
+      const difference =
+        startX - endX;
+
+      if (Math.abs(difference) < 60) {
+        return;
+      }
+
+      if (difference > 0) {
+        showPage(currentPageIndex + 1);
+      } else {
+        showPage(currentPageIndex - 1);
+      }
+
+    },
+    { passive: true }
+  );
+
+
+  /* ==========================================
+     SONG
+  ========================================== */
+
+  const song =
+    document.getElementById("song");
+
+  const songButton =
+    document.getElementById("songButton");
+
+
+  if (song && songButton) {
+
+    songButton.addEventListener(
+      "click",
+      async function () {
+
+        if (song.paused) {
+
+          song.currentTime = 20;
+
+          try {
+
+            await song.play();
+
+            songButton.textContent = "Ⅱ";
+
+          } catch (error) {
+
+            console.error(
+              "Song error:",
+              error
+            );
+
+          }
+
+        } else {
+
+          song.pause();
+
+          songButton.textContent = "♫";
+
+        }
+
+      }
+    );
+
+
+    song.addEventListener(
+      "timeupdate",
+      function () {
+
+        if (song.currentTime >= 30) {
+
+          song.pause();
+
+          song.currentTime = 20;
+
+          songButton.textContent = "↻";
+
+        }
+
+      }
+    );
+
+  }
+
+
+  /* ==========================================
+     CANON IN D
+  ========================================== */
+
+  const canon =
+    document.getElementById("canon");
+
+  const canonButton =
+    document.getElementById("canonButton");
+
+
+  if (canon && canonButton) {
+
+    canonButton.addEventListener(
+      "click",
+      async function () {
+
+        if (canon.paused) {
+
+          canon.currentTime = 110;
+
+          try {
+
+            await canon.play();
+
+            canonButton.innerHTML =
+              "✦<span>playing...</span>";
+
+          } catch (error) {
+
+            console.error(
+              "Canon error:",
+              error
+            );
+
+          }
+
+        } else {
+
+          canon.pause();
+
+          canonButton.innerHTML =
+            "✦<span>let it play</span>";
+
+        }
+
+      }
+    );
+
+
+    canon.addEventListener(
+      "ended",
+      function () {
+
+        canonButton.innerHTML =
+          "✦<span>play again</span>";
+
+      }
+    );
+
+  }
+
+
+  /* ==========================================
+     STOP OTHER MUSIC
+  ========================================== */
+
+  if (song && canon) {
+
+    song.addEventListener(
+      "play",
+      function () {
+
+        canon.pause();
+
+        if (canonButton) {
+
+          canonButton.innerHTML =
+            "✦<span>let it play</span>";
+
+        }
+
+      }
+    );
+
+
+    canon.addEventListener(
+      "play",
+      function () {
+
+        song.pause();
+
+        if (songButton) {
+          songButton.textContent = "♫";
+        }
+
+      }
+    );
+
+  }
+
+
+  /* ==========================================
+     PRELOAD IMAGES
+  ========================================== */
+
+  const images = [
+    "martina-childhood.jpg",
+    "flowerhorn.jpg",
+    "oscar-blackey.jpg",
+    "oscar-lemon.jpg",
+    "betta.jpg",
+    "tanks-setup.jpg",
+    "drawing-01.jpg",
+    "drawing-02.jpg",
+    "drawing-03.jpg",
+    "drawing-04.jpg",
+    "1000228743.jpg",
+    "1000228745.jpg"
+  ];
+
+
+  images.forEach(function (src) {
+
+    const img = new Image();
+
+    img.src = src;
+
+  });
+
+
+  /* ==========================================
+     START
+  ========================================== */
+
+  showPage(0);
 
 });
-
-});
-
-/* ==========================================
-KEYBOARD NAVIGATION
-========================================== */
-
-document.addEventListener(
-"keydown",
-event => {
-
-if (  
-  event.key === "ArrowRight" ||  
-  event.key === "Enter"  
-) {  
-
-  showPage(current + 1);  
-
-}  
-
-if (event.key === "ArrowLeft") {  
-
-  showPage(current - 1);  
-
-}
-
-}
-);
-
-/* ==========================================
-SWIPE NAVIGATION
-========================================== */
-
-let touchStartX = 0;
-let touchEndX = 0;
-
-document.addEventListener(
-"touchstart",
-event => {
-
-touchStartX =  
-  event.changedTouches[0].screenX;
-
-},
-{ passive: true }
-);
-
-document.addEventListener(
-"touchend",
-event => {
-
-touchEndX =  
-  event.changedTouches[0].screenX;  
-
-const difference =  
-  touchStartX - touchEndX;  
-
-if (Math.abs(difference) < 60) {  
-  return;  
-}  
-
-if (difference > 0) {  
-
-  showPage(current + 1);  
-
-} else {  
-
-  showPage(current - 1);  
-
-}
-
-},
-{ passive: true }
-);
-
-/* ==========================================
-SONG
-========================================== */
-
-const song =
-document.getElementById("song");
-
-const songButton =
-document.getElementById(
-"songButton"
-);
-
-songButton.addEventListener(
-"click",
-async () => {
-
-if (song.paused) {  
-
-  song.currentTime = 20;  
-
-  try {  
-
-    await song.play();  
-
-    songButton.innerHTML = "Ⅱ";  
-
-  } catch(error) {  
-
-    console.log(error);  
-
-  }  
-
-} else {  
-
-  song.pause();  
-
-  songButton.innerHTML = "♫";  
-
-}
-
-}
-);
-
-song.addEventListener(
-"timeupdate",
-() => {
-
-if (song.currentTime >= 30) {  
-
-  song.pause();  
-
-  song.currentTime = 20;  
-
-  songButton.innerHTML = "↻";  
-
-}
-
-}
-);
-
-/* ==========================================
-CANON
-========================================== */
-
-const canon =
-document.getElementById("canon");
-
-const canonButton =
-document.getElementById(
-"canonButton"
-);
-
-canonButton.addEventListener(
-"click",
-async () => {
-
-if (canon.paused) {  
-
-  canon.currentTime = 110;  
-
-  try {  
-
-    await canon.play();  
-
-    canonButton.innerHTML = `  
-      ✦  
-      <span>playing...</span>  
-    `;  
-
-  } catch(error) {  
-
-    console.log(error);  
-
-  }  
-
-} else {  
-
-  canon.pause();  
-
-  canonButton.innerHTML = `  
-    ✦  
-    <span>let it play</span>  
-  `;  
-
-}
-
-}
-);
-
-/* ==========================================
-DON'T PLAY BOTH SONGS
-========================================== */
-
-song.addEventListener(
-"play",
-() => {
-
-canon.pause();
-
-}
-);
-
-canon.addEventListener(
-"play",
-() => {
-
-song.pause();
-
-}
-);
-
-/* ==========================================
-PRELOAD NEXT IMAGES
-========================================== */
-
-const images = [
-"flowerhorn.jpg",
-"oscar-blackey.jpg",
-"oscar-lemon.jpg",
-"betta.jpg",
-"tanks-setup.jpg",
-"drawing-01.jpg",
-"drawing-02.jpg",
-"drawing-03.jpg",
-"drawing-04.jpg",
-"1000228743.jpg",
-"1000228745.jpg"
-];
-
-images.forEach(src => {
-
-const image =
-new Image();
-
-image.src = src;
-
-}); دا css
