@@ -3,12 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Two Quiet Worlds</title>
+  <title>Two Different Worlds</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="styles.css">
@@ -16,689 +14,493 @@
 
 <body>
 
-<div id="cursor"></div>
+<div id="app">
 
-<div class="ambient ambient-a"></div>
-<div class="ambient ambient-b"></div>
+  <!-- ================= PAGE 1 ================= -->
 
-<div class="stars"></div>
+  <section class="page active" id="page1">
 
-<div class="progress">
-  <span id="progressBar"></span>
-</div>
+    <div class="page-content childhood">
 
+      <div class="photo-frame">
+        <img src="martina-childhood.jpg" alt="Martina">
+      </div>
 
-<!-- =========================
-     INTRO
-========================= -->
+      <div class="private-words">
 
-<section class="intro">
+        <div class="word-line">full of life</div>
 
-  <div class="intro-content">
+        <div class="word-line secret">
+          wala derly ferly
+        </div>
 
-    <div class="memory-photo">
-      <img src="martina-childhood.jpg" alt="Martina">
+        <div class="word-line">
+          i wish they became 1000
+        </div>
+
+      </div>
+
+      <button class="continue" data-next>
+        <span>✦</span>
+      </button>
+
     </div>
 
-    <div class="photo-caption">
-      full of life
-    </div>
+  </section>
 
-    <div class="intro-secret" id="introSecret">
-      <span></span>
-    </div>
 
-    <button class="main-tap" id="introButton">
-      <span>tap</span>
-    </button>
+  <!-- ================= PAGE 2 ================= -->
 
-    <div class="intro-title">
+  <section class="page" id="page2">
 
-      <span class="tiny-label">
-        A LITTLE UNIVERSE
+    <div class="page-content">
+
+      <span class="eyebrow">
+        HER WORLD
       </span>
 
       <h1>
-        Two Quiet
-        <em>Worlds</em>
+        A little world<br>
+        <em>underwater.</em>
+      </h1>
+
+      <p class="intro-text">
+        Quiet things have a way of becoming important.
+      </p>
+
+      <button class="continue" data-next>
+        <span>continue</span>
+        <b>→</b>
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= PAGE 3 ================= -->
+
+  <section class="page aquarium-page" id="page3">
+
+    <div class="page-content wide">
+
+      <span class="eyebrow">
+        HER AQUATIC UNIVERSE
+      </span>
+
+      <h2>
+        The quiet residents.
+      </h2>
+
+      <p class="subtext">
+        Four little lives. Four little stories.
+      </p>
+
+      <div class="fish-grid">
+
+        <div class="fish-card">
+          <img src="flowerhorn.jpg">
+          <div>
+            <small>THE CROWNED WONDER</small>
+            <h3>Flowerhorn</h3>
+          </div>
+        </div>
+
+        <div class="fish-card">
+          <img src="oscar-blackey.jpg">
+          <div>
+            <small>OSCAR</small>
+            <h3>Blackey</h3>
+          </div>
+        </div>
+
+        <div class="fish-card">
+          <img src="oscar-lemon.jpg">
+          <div>
+            <small>OSCAR</small>
+            <h3>Lemon</h3>
+          </div>
+        </div>
+
+        <div class="fish-card">
+          <img src="betta.jpg">
+          <div>
+            <small>OCEAN SILK</small>
+            <h3>Betta</h3>
+          </div>
+        </div>
+
+      </div>
+
+      <button class="continue" data-next>
+        <span>there's more</span>
+        <b>→</b>
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= PAGE 4 ================= -->
+
+  <section class="page" id="page4">
+
+    <div class="page-content wide">
+
+      <div class="large-image aquarium-image">
+        <img src="tanks-setup.jpg">
+      </div>
+
+      <div class="quote">
+        <span>“</span>
+        Where patience and love<br>
+        transform space into<br>
+        a quiet universe.
+      </div>
+
+      <button class="continue" data-next>
+        <span>continue</span>
+        <b>→</b>
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= PAGE 5 ================= -->
+
+  <section class="page art-page" id="page5">
+
+    <div class="page-content wide">
+
+      <span class="eyebrow">
+        HER WORLD · II
+      </span>
+
+      <h2>
+        Where feelings<br>
+        <em>find a shape.</em>
+      </h2>
+
+      <p class="subtext">
+        Some things are easier to draw than to say.
+      </p>
+
+      <div class="art-grid">
+
+        <div class="art-card">
+          <img src="drawing-01.jpg">
+          <span>01</span>
+        </div>
+
+        <div class="art-card">
+          <img src="drawing-02.jpg">
+          <span>02</span>
+        </div>
+
+        <div class="art-card">
+          <img src="drawing-03.jpg">
+          <span>03</span>
+        </div>
+
+        <div class="art-card">
+          <img src="drawing-04.jpg">
+          <span>04</span>
+        </div>
+
+      </div>
+
+      <button class="continue" data-next>
+        <span>continue</span>
+        <b>→</b>
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= PAGE 6 ================= -->
+
+  <section class="page music-page" id="page6">
+
+    <div class="page-content">
+
+      <span class="eyebrow">
+        A MOMENT OF MELODY
+      </span>
+
+      <h2>
+        يمكن حبيت
+      </h2>
+
+      <p class="arabic">
+        "أغنيتكِ المفضلة... بعيداً عن صخب البيت
+        والمشاكسات العائلية الجميلة."
+      </p>
+
+      <p class="small-note">
+        Some moments deserve their own soundtrack.
+      </p>
+
+      <audio id="song" src="song.mp3"></audio>
+
+      <button id="songButton" class="music-button">
+        ♫
+      </button>
+
+      <span class="time">
+        00:20 — 00:30
+      </span>
+
+      <button class="continue" data-next>
+        <span>continue</span>
+        <b>→</b>
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= PAGE 7 ================= -->
+
+  <section class="page space-page" id="page7">
+
+    <div class="space-image">
+      <img src="1000228743.jpg">
+    </div>
+
+    <div class="space-content">
+
+      <span class="eyebrow">
+        ANOTHER WORLD
+      </span>
+
+      <h1>
+        You look up.
       </h1>
 
       <p>
-        Where art, life, and the stars meet in harmony.
+        And somewhere above all the noise,
+        there is an entire universe waiting.
       </p>
 
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     HER AQUATIC WORLD
-========================= -->
-
-<section class="world-section aquatic">
-
-  <div class="section-heading">
-
-    <span class="chapter">
-      HER WORLD · I
-    </span>
-
-    <h2>
-      The Quiet
-      <em>Residents</em>
-    </h2>
-
-    <p>
-      A small world filled with little lives,
-      each one quietly carrying a story.
-    </p>
-
-  </div>
-
-
-  <div class="fish-grid">
-
-
-    <!-- Flowerhorn -->
-
-    <div class="fish-card">
-
-      <div class="fish-inner">
-
-        <div class="fish-front">
-
-          <div class="fish-number">
-            01
-          </div>
-
-          <div class="fish-question">
-            ?
-          </div>
-
-          <small>
-            meet one
-          </small>
-
-        </div>
-
-
-        <div class="fish-back">
-
-          <img
-            src="flowerhorn.jpg"
-            alt="Flowerhorn"
-          >
-
-          <div class="fish-info">
-
-            <span>
-              THE CROWNED WONDER
-            </span>
-
-            <h3>
-              Flowerhorn
-            </h3>
-
-            <p>
-              A little king of her
-              aquatic universe.
-            </p>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- Blackey -->
-
-    <div class="fish-card">
-
-      <div class="fish-inner">
-
-        <div class="fish-front">
-
-          <div class="fish-number">
-            02
-          </div>
-
-          <div class="fish-question">
-            ?
-          </div>
-
-          <small>
-            meet one
-          </small>
-
-        </div>
-
-
-        <div class="fish-back">
-
-          <img
-            src="oscar-blackey.jpg"
-            alt="Blackey"
-          >
-
-          <div class="fish-info">
-
-            <span>
-              OSCAR
-            </span>
-
-            <h3>
-              Blackey
-            </h3>
-
-            <p>
-              Quietly dramatic.
-              Impossible to forget.
-            </p>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- Lemon -->
-
-    <div class="fish-card">
-
-      <div class="fish-inner">
-
-        <div class="fish-front">
-
-          <div class="fish-number">
-            03
-          </div>
-
-          <div class="fish-question">
-            ?
-          </div>
-
-          <small>
-            meet one
-          </small>
-
-        </div>
-
-
-        <div class="fish-back">
-
-          <img
-            src="oscar-lemon.jpg"
-            alt="Lemon"
-          >
-
-          <div class="fish-info">
-
-            <span>
-              OSCAR
-            </span>
-
-            <h3>
-              Lemon
-            </h3>
-
-            <p>
-              A little warmth
-              swimming through the quiet.
-            </p>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- Betta -->
-
-    <div class="fish-card">
-
-      <div class="fish-inner">
-
-        <div class="fish-front">
-
-          <div class="fish-number">
-            04
-          </div>
-
-          <div class="fish-question">
-            ?
-          </div>
-
-          <small>
-            meet one
-          </small>
-
-        </div>
-
-
-        <div class="fish-back">
-
-          <img
-            src="betta.jpg"
-            alt="Betta"
-          >
-
-          <div class="fish-info">
-
-            <span>
-              OCEAN SILK
-            </span>
-
-            <h3>
-              Betta
-            </h3>
-
-            <p>
-              Grace in motion.
-            </p>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- Aquarium -->
-
-  <div class="aquarium">
-
-    <div
-      class="aquarium-cover"
-      id="aquariumCover"
-    >
-
-      <span>
-        There is something
-        behind this.
-      </span>
-
-      <button>
-        open it
+      <button class="continue" data-next>
+        <span>look closer</span>
+        <b>→</b>
       </button>
 
     </div>
 
-    <img
-      src="tanks-setup.jpg"
-      alt="Aquarium setup"
-    >
+  </section>
 
-    <div class="aquarium-caption">
 
-      <span>
-        A QUIET PLACE
+  <!-- ================= PAGE 8 ================= -->
+
+  <section class="page iss-page" id="page8">
+
+    <div class="iss-image">
+      <img src="1000228745.jpg">
+    </div>
+
+    <div class="space-content">
+
+      <span class="eyebrow">
+        YOUR UNIVERSE
       </span>
 
-      <h3>
-        Where patience becomes
-        a universe.
-      </h3>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     HER ART
-========================= -->
-
-<section class="world-section art-world">
-
-  <div class="section-heading">
-
-    <span class="chapter">
-      HER WORLD · II
-    </span>
-
-    <h2>
-      Feelings Find
-      <em>a Shape</em>
-    </h2>
-
-    <p>
-      Some things are easier to draw
-      than to say.
-    </p>
-
-  </div>
-
-
-  <div class="art-grid">
-
-
-    <div class="art-card">
-
-      <div class="art-cover">
-        <span>01</span>
-        <small>tap</small>
-      </div>
-
-      <img
-        src="drawing-01.jpg"
-        alt="Blue drawing"
-      >
-
-      <div class="art-caption">
-        Gentle strokes in blue
-      </div>
-
-    </div>
-
-
-    <div class="art-card">
-
-      <div class="art-cover">
-        <span>02</span>
-        <small>tap</small>
-      </div>
-
-      <img
-        src="drawing-02.jpg"
-        alt="Red portrait"
-      >
-
-      <div class="art-caption">
-        Warmth captured in red
-      </div>
-
-    </div>
-
-
-    <div class="art-card">
-
-      <div class="art-cover">
-        <span>03</span>
-        <small>tap</small>
-      </div>
-
-      <img
-        src="drawing-03.jpg"
-        alt="Pencil drawing"
-      >
-
-      <div class="art-caption">
-        Depth & shadows
-      </div>
-
-    </div>
-
-
-    <div class="art-card">
-
-      <div class="art-cover">
-        <span>04</span>
-        <small>tap</small>
-      </div>
-
-      <img
-        src="drawing-04.jpg"
-        alt="Portrait"
-      >
-
-      <div class="art-caption">
-        Eyes that speak quietly
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     MUSIC
-========================= -->
-
-<section class="music-section">
-
-  <div class="music-card">
-
-    <span>
-      A MOMENT OF MELODY
-    </span>
-
-    <h2>
-      يمكن حبيت
-    </h2>
-
-    <p>
-      This one felt appropriate.
-    </p>
-
-    <audio
-      id="song"
-      src="song.mp3"
-      preload="metadata">
-    </audio>
-
-    <button id="songButton">
-      ♪
-      <span>
-        listen
-      </span>
-    </button>
-
-    <small>
-      00:20 — 00:30
-    </small>
-
-  </div>
-
-</section>
-
-
-<!-- =========================
-     YOUR UNIVERSE
-========================= -->
-
-<section class="space-world">
-
-  <div class="section-heading">
-
-    <span class="chapter">
-      YOUR WORLD · I
-    </span>
-
-    <h2>
-      Beyond the
-      <em>Horizon</em>
-    </h2>
-
-    <p>
-      You look up.
-    </p>
-
-  </div>
-
-
-  <div
-    class="space-experience"
-    id="spaceExperience"
-  >
-
-    <div class="galaxy">
-      <img
-        src="1000228743.jpg"
-        alt="Galaxy"
-      >
-    </div>
-
-    <div class="iss">
-      <img
-        src="1000228745.jpg"
-        alt="ISS"
-      >
-    </div>
-
-
-    <div class="space-overlay">
-
-      <div id="spaceText">
-
-        <span>
-          KEEP LOOKING
-        </span>
-
-        <h3>
-          There is always
-          something beyond.
-        </h3>
-
-      </div>
-
-      <button id="spaceButton">
-        reveal
+      <h1>
+        Beyond the horizon.
+      </h1>
+
+      <p>
+        Infinite boundaries.
+        Endless questions.
+        A quiet curiosity.
+      </p>
+
+      <button class="continue" data-next>
+        <span>continue</span>
+        <b>→</b>
       </button>
 
     </div>
 
-  </div>
-
-</section>
+  </section>
 
 
-<!-- =========================
-     FINAL MERGE
-========================= -->
+  <!-- ================= PAGE 9 ================= -->
 
-<section class="final-section">
+  <section class="page merge-page" id="page9">
 
-  <div class="merge-background"></div>
+    <div class="merge-stars"></div>
 
-  <div class="final-content">
+    <div class="merge-content">
 
-    <span class="final-label">
-      SOMEWHERE BETWEEN
-    </span>
+      <span class="eyebrow">
+        SOMEWHERE BETWEEN
+      </span>
 
+      <h1>
+        Two different worlds.
+      </h1>
 
-    <div
-      class="final-step active"
-      data-step="0"
-    >
-      <h2>
-        Two worlds.
-      </h2>
+      <p class="merge-line">
+        One made of water,
+        colors and quiet little lives.
+      </p>
+
+      <button class="continue" data-next>
+        <span>continue</span>
+        <b>→</b>
+      </button>
+
     </div>
 
+  </section>
 
-    <div
-      class="final-step"
-      data-step="1"
-    >
+
+  <!-- ================= PAGE 10 ================= -->
+
+  <section class="page merge-page second-merge" id="page10">
+
+    <div class="merge-stars"></div>
+
+    <div class="merge-content">
+
+      <p class="merge-line">
+        The other made of stars,
+        questions and distant worlds.
+      </p>
+
       <h2>
-        Different directions.
+        Completely different.
       </h2>
+
+      <button class="continue" data-next>
+        <span>but then...</span>
+        <b>→</b>
+      </button>
+
     </div>
 
+  </section>
 
-    <div
-      class="final-step"
-      data-step="2"
-    >
+
+  <!-- ================= PAGE 11 ================= -->
+
+  <section class="page final-merge" id="page11">
+
+    <div class="water-layer"></div>
+    <div class="star-layer"></div>
+
+    <div class="final-merge-content">
+
+      <span class="eyebrow">
+        TWO DIFFERENT WORLDS
+      </span>
+
+      <h1>
+        And somehow...
+      </h1>
+
       <h2>
-        Same quiet moment.
+        they found the same sky.
       </h2>
+
+      <p>
+        Maybe the most beautiful things
+        are not the things that are alike.
+      </p>
+
+      <button class="continue" data-next>
+        <span>one last thing</span>
+        <b>→</b>
+      </button>
+
     </div>
 
-
-    <button
-      id="mergeButton"
-      class="merge-button"
-    >
-      continue
-    </button>
+  </section>
 
 
-    <div
-      class="canon-area"
-      id="canonArea"
-    >
+  <!-- ================= PAGE 12 ================= -->
+
+  <section class="page confession-page" id="page12">
+
+    <div class="confession-content">
+
+      <span class="eyebrow">
+        A QUIET THOUGHT
+      </span>
+
+      <h1>
+        I never really planned
+        for these two worlds
+        to meet.
+      </h1>
+
+      <p>
+        But somewhere along the way,
+        this little universe started
+        feeling strangely right.
+      </p>
+
+      <button id="canonButton" class="canon-button">
+        ✦
+        <span>let it play</span>
+      </button>
 
       <audio
         id="canon"
-        src="canon_in_d_memory.mp3"
-        preload="metadata">
+        src="canon_in_d_memory.mp3">
       </audio>
-
-      <button id="canonButton">
-
-        ✦
-
-        <span>
-          let it play
-        </span>
-
-      </button>
-
-      <small>
-        Canon in D · 01:50
-      </small>
 
     </div>
 
+  </section>
 
-    <!-- FINAL MESSAGE -->
 
-    <div
-      class="final-message"
-      id="finalMessage"
-    >
+  <!-- ================= PAGE 13 ================= -->
 
-      <div class="final-line">
-        I don't think these worlds
-        were meant to meet.
+  <section class="page last-page" id="page13">
+
+    <div class="last-content">
+
+      <div class="last-line">
+        Maybe some worlds
+        don't need an explanation.
       </div>
 
-      <div class="final-line second">
-        And yet...
-        here they are.
+      <div class="last-line soft">
+        Maybe it's enough
+        that they understand each other.
       </div>
 
-      <div class="final-symbol">
+      <div class="gold-star">
         ✦
       </div>
 
-      <div class="private-ending">
+      <div class="private">
         wala derly ferly.
       </div>
 
     </div>
 
+  </section>
+
+
+  <!-- NAVIGATION -->
+
+  <div class="page-number">
+    <span id="currentPage">01</span>
+    <i>/</i>
+    <span>13</span>
   </div>
 
-</section>
-
-
-<footer>
-  two quiet worlds
-</footer>
-
+</div>
 
 <script src="script.js"></script>
 
